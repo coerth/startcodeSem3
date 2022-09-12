@@ -58,6 +58,25 @@ public class EmployeeFacade {
 //            throw new EmployeeNotFoundException("The Employee entity with ID: "+id+" Was not found");
         return new EmployeeDTO(Employee);
     }
+
+    public List<EmployeeDTO> getByName(String name)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e WHERE e.name=:name",Employee.class);
+            query.setParameter("name", name);
+
+            return EmployeeDTO.getDtos(query.getResultList());
+    }
+
+    public EmployeeDTO getBySalary()
+    {
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e  ORDER BY e.salary DESC ", Employee.class);
+
+        return new EmployeeDTO(query.setMaxResults(1).getSingleResult());
+    }
     
     //TODO Remove/Change this before use
 
@@ -68,11 +87,17 @@ public class EmployeeFacade {
         List<Employee> Employees = query.getResultList();
         return EmployeeDTO.getDtos(Employees);
     }
+
+
     
     public static void main(String[] args) {
         emf = EMF_Creator.createEntityManagerFactory();
         EmployeeFacade pe = getInstance(emf);
-        pe.getAll().forEach(dto->System.out.println(dto));
+        /*pe.getAll().forEach(dto->System.out.println(dto));*/
+
+       Employee employee  = pe.getBySalary();
+
+        System.out.println(employee);
     }
 
 }
