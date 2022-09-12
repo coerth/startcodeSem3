@@ -50,7 +50,7 @@ public class EmployeeResource
     }
 
     @GET
-    @Path("/byid/{id}")
+    @Path("/id/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getById(@PathParam("id") int id)
     {
@@ -59,7 +59,7 @@ public class EmployeeResource
     }
 
     @GET
-    @Path("/byname/{name}")
+    @Path("/name/{name}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getByName(@PathParam("name") String name)
     {
