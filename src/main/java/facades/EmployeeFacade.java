@@ -51,7 +51,7 @@ public class EmployeeFacade {
         }
         return new EmployeeDTO(Employee);
     }
-    public EmployeeDTO getById(long id) { //throws EmployeeNotFoundException {
+    public EmployeeDTO getById(int id) { //throws EmployeeNotFoundException {
         EntityManager em = emf.createEntityManager();
         Employee Employee = em.find(Employee.class, id);
 //        if (Employee == null)
@@ -69,7 +69,7 @@ public class EmployeeFacade {
             return EmployeeDTO.getDtos(query.getResultList());
     }
 
-    public EmployeeDTO getBySalary()
+    public EmployeeDTO getEployeeWithHighestSalary()
     {
         EntityManager em = emf.createEntityManager();
 
@@ -95,7 +95,7 @@ public class EmployeeFacade {
         EmployeeFacade pe = getInstance(emf);
         /*pe.getAll().forEach(dto->System.out.println(dto));*/
 
-       Employee employee  = pe.getBySalary();
+       EmployeeDTO employee  = pe.getEployeeWithHighestSalary();
 
         System.out.println(employee);
     }
