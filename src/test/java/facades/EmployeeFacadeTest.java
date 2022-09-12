@@ -65,7 +65,7 @@ public class EmployeeFacadeTest
     public void createTest()
     {
         EmployeeDTO result = facade.create(new EmployeeDTO(new Employee("Casper", "En helt femte adresse", 500)));
-        assertEquals(5, result.getId());
+        assertEquals(21, result.getId());
     }
 
     @Test
