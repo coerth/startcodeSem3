@@ -5,7 +5,9 @@
  */
 package facades;
 
+import dtos.PersonDTO;
 import dtos.RenameMeDTO;
+import entities.Person;
 import entities.RenameMe;
 import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
@@ -18,9 +20,11 @@ public class Populator {
     public static void populate(){
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade pf = PersonFacade.getInstance(emf);
-        /*pf.create(new RenameMeDTO(new RenameMe("First 1", "Last 1")));
-        pf.create(new RenameMeDTO(new RenameMe("First 2", "Last 2")));
-        pf.create(new RenameMeDTO(new RenameMe("First 3", "Last 3")));*/
+        pf.create(new PersonDTO(new Person("Long", 21)));
+        pf.create(new PersonDTO(new Person("Betul", 99)));
+        pf.create(new PersonDTO(new Person("Denis", 18)));
+
+
     }
     
     public static void main(String[] args) {

@@ -33,4 +33,12 @@ public class PersonResource {
         System.out.println(rmdto);
         return Response.ok().entity(rmdto).build();
     }*/
+
+    @GET
+    @Path("/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersons()
+    {
+        return Response.ok().entity(GSON.toJson(FACADE.getAll())).build();
+    }
 }

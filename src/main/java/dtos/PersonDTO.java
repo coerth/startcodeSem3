@@ -20,15 +20,7 @@ public class PersonDTO {
 
     private String name;
     private int age;
-    private String str1;
-    private String str2;
 
-    public PersonDTO(String dummyStr1, String dummyStr2) {
-        this.str1 = dummyStr1;
-        this.str2 = dummyStr2;
-    }
-    
-    
 
     public PersonDTO(String name, int age) {
         this.name = name;
@@ -42,7 +34,10 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person person) {
-        this.id = person.getId();
+        if(person.getId() != null)
+        {
+            this.id = person.getId();
+        }
         this.name = person.getName();
         this.age = person.getAge();
     }
@@ -51,30 +46,6 @@ public class PersonDTO {
         List<PersonDTO> persondtos = new ArrayList();
         persons.forEach(person->persondtos.add(new PersonDTO(person)));
         return persondtos;
-    }
-
-
-    public PersonDTO(RenameMe person) {
-        if(person.getId() != null)
-            this.id = person.getId();
-        this.str1 = person.getDummyStr1();
-        this.str2 = person.getDummyStr2();
-    }
-
-    public String getDummyStr1() {
-        return str1;
-    }
-
-    public void setDummyStr1(String dummyStr1) {
-        this.str1 = dummyStr1;
-    }
-
-    public String getDummyStr2() {
-        return str2;
-    }
-
-    public void setDummyStr2(String dummyStr2) {
-        this.str2 = dummyStr2;
     }
 
 
@@ -100,8 +71,6 @@ public class PersonDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", str1='" + str1 + '\'' +
-                ", str2='" + str2 + '\'' +
                 '}';
     }
 }

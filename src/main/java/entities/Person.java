@@ -49,22 +49,11 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    private String dummyStr1;
-    private String dummyStr2;
-
-    public Person(String dummyStr1, String dummyStr2) {
-        this.dummyStr1 = dummyStr1;
-        this.dummyStr2 = dummyStr2;
-    }
-
     public Person(Long id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
-
-
-
 
     public Person(String name, int age) {
         this.name = name;
