@@ -1,0 +1,78 @@
+package facades;
+
+import dtos.EmployeeDTO;
+import entities.Employee;
+import utils.EMF_Creator;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import java.util.List;
+
+/**
+ *
+ * Rename Class to a relevant name Add add relevant facade methods
+ */
+public class EmployeeFacade {
+
+    private static EmployeeFacade instance;
+    private static EntityManagerFactory emf;
+    
+    //Private Constructor to ensure Singleton
+    private EmployeeFacade() {}
+    
+    
+    /**
+     * 
+     * @param _emf
+     * @return an instance of this facade class.
+     */
+    public static EmployeeFacade getInstance(EntityManagerFactory _emf) {
+        if (instance == null) {
+            emf = _emf;
+            instance = new EmployeeFacade();
+        }
+        return instance;
+    }
+
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
+    }
+    
+    public EmployeeDTO create(EmployeeDTO employeeDTO){
+        Employee Employee = new Employee(employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(Employee);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new EmployeeDTO(Employee);
+    }
+    public EmployeeDTO getById(long id) { //throws EmployeeNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Employee Employee = em.find(Employee.class, id);
+//        if (Employee == null)
+//            throw new EmployeeNotFoundException("The Employee entity with ID: "+id+" Was not found");
+        return new EmployeeDTO(Employee);
+    }
+    
+    //TODO Remove/Change this before use
+
+    
+    public List<EmployeeDTO> getAll(){
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Employee> query = em.createQuery("SELECT e FROM Employee e", Employee.class);
+        List<Employee> Employees = query.getResultList();
+        return EmployeeDTO.getDtos(Employees);
+    }
+    
+    public static void main(String[] args) {
+        emf = EMF_Creator.createEntityManagerFactory();
+        EmployeeFacade pe = getInstance(emf);
+        pe.getAll().forEach(dto->System.out.println(dto));
+    }
+
+}
