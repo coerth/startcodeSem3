@@ -17,11 +17,11 @@ public class EmployeeResource
     private static final EmployeeFacade FACADE =  EmployeeFacade.getInstance(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-   /* @GET
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
-    }*/
+    }
 
    /* @POST
     @Produces({MediaType.APPLICATION_JSON})
