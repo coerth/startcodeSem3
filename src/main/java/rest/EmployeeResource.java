@@ -63,7 +63,7 @@ public class EmployeeResource
     @PUT
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response update(String jsonInput, @PathParam("id") long id)
+    public Response update(String jsonInput, @PathParam("id") long id) throws EmployeeNotFoundException
     {
         EmployeeDTO employeeDTO = GSON.fromJson(jsonInput,EmployeeDTO.class);
         employeeDTO.setId(id);
