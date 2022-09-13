@@ -1,8 +1,8 @@
 GET http://localhost:8080/devops_starter_war_exploded/api/xxx
 
 ###
-POST https://koksikoden.dk/api/employee/
+POST https://koksikoden.dk/startcodeSem3/api/employee/
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
 
-{"address": "Thomasvej", "name": "Thomas", "salary":  30000}
+{"name": "Thomas", "address": "Thomasvej", "salary":  30000}

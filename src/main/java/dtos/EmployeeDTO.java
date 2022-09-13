@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class EmployeeDTO
 {
-    private long id;
+    private Long id;
     private String name;
     private String address;
     private int salary;

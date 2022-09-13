@@ -6,6 +6,7 @@ import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityNotFoundException;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -51,7 +52,28 @@ public class EmployeeFacade {
         }
         return new EmployeeDTO(Employee);
     }
-    public EmployeeDTO getById(int id) { //throws EmployeeNotFoundException {
+
+    public EmployeeDTO update(EmployeeDTO employeeDTO)
+    {
+        EntityManager em = getEntityManager();
+        Employee employeeFromDB = em.find(Employee.class, employeeDTO.getId());
+        if(employeeFromDB == null)
+        {
+            throw new EntityNotFoundException("No such Employee with id:" + employeeDTO.getId());
+        }
+
+        Employee Employee = new Employee( employeeDTO.getId(),employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
+
+        try {
+            em.getTransaction().begin();
+            em.merge(Employee);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new EmployeeDTO(Employee);
+    }
+    public EmployeeDTO getById(long id) { //throws EmployeeNotFoundException {
         EntityManager em = emf.createEntityManager();
         Employee Employee = em.find(Employee.class, id);
 //        if (Employee == null)
@@ -98,6 +120,7 @@ public class EmployeeFacade {
        EmployeeDTO employee  = pe.getEmployeeWithHighestSalary();
 
         System.out.println(employee);
+        pe.update(new EmployeeDTO(new Employee(Long.valueOf(1), "Henriette", "Balkonen", 300)));
     }
 
 }
