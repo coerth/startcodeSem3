@@ -74,11 +74,12 @@ public class EmployeeFacade {
         }
         return new EmployeeDTO(Employee);
     }
-    public EmployeeDTO getById(long id) { //throws EmployeeNotFoundException {
+    public EmployeeDTO getById(long id) throws EmployeeNotFoundException
+    {
         EntityManager em = emf.createEntityManager();
         Employee Employee = em.find(Employee.class, id);
-//        if (Employee == null)
-//            throw new EmployeeNotFoundException("The Employee entity with ID: "+id+" Was not found");
+        if (Employee == null)
+            throw new EmployeeNotFoundException("The Employee entity with ID: "+id+" Was not found");
         return new EmployeeDTO(Employee);
     }
 
