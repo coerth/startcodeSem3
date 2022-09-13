@@ -24,6 +24,7 @@ public class EmployeeResource
         return "{\"msg\":\"Hello World\"}";
     }
 
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
@@ -56,6 +57,12 @@ public class EmployeeResource
     {
 
         return Response.ok().entity(GSON.toJson(FACADE.getById(id))).build();
+    }
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response update(String jsonInput)
+    {
+        return Response.ok().entity(GSON.toJson(FACADE.update(GSON.fromJson(jsonInput,EmployeeDTO.class)))).build();
     }
 
     @GET
