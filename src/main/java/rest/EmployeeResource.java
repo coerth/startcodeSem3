@@ -64,8 +64,8 @@ public class EmployeeResource
     public Response update(String jsonInput, @PathParam("id") long id)
     {
         EmployeeDTO employeeDTO = GSON.fromJson(jsonInput,EmployeeDTO.class);
-
-        return Response.ok().entity(GSON.toJson(FACADE.update(employeeDTO, id))).build();
+        employeeDTO.setId(id);
+        return Response.ok().entity(GSON.toJson(FACADE.update(employeeDTO))).build();
     }
 
     @GET
@@ -74,5 +74,12 @@ public class EmployeeResource
     public Response getByName(@PathParam("name") String name)
     {
         return Response.ok().entity(GSON.toJson(FACADE.getByName(name))).build();
+    }
+
+    @GET
+    @Path("/testexception")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response throwException() throws Exception {
+        throw  new Exception("my exception");
     }
 }

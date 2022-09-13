@@ -12,6 +12,6 @@ PUT https://koksikoden.dk/startcodeSem3/api/employee/1
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
 
-{"name": "Kong Charles", "address": "Buckingham Palace", "salary":  100000}
+{"name": "Kong Charles", "address": "Buckingham Palace", "salary":  100000000}
 
 ###

@@ -53,16 +53,16 @@ public class EmployeeFacade {
         return new EmployeeDTO(Employee);
     }
 
-    public EmployeeDTO update(EmployeeDTO employeeDTO, long id)
+    public EmployeeDTO update(EmployeeDTO employeeDTO)
     {
         EntityManager em = getEntityManager();
-        Employee employeeFromDB = em.find(Employee.class, id);
+        Employee employeeFromDB = em.find(Employee.class, employeeDTO.getId());
         if(employeeFromDB == null)
         {
             throw new EntityNotFoundException("No such Employee with id:" + employeeDTO.getId());
         }
 
-        Employee Employee = new Employee(id,employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
+        Employee Employee = new Employee(employeeDTO.getId(),employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
 
         try {
             em.getTransaction().begin();
