@@ -69,7 +69,7 @@ public class EmployeeFacade {
             return EmployeeDTO.getDtos(query.getResultList());
     }
 
-    public EmployeeDTO getEployeeWithHighestSalary()
+    public EmployeeDTO getEmployeeWithHighestSalary()
     {
         EntityManager em = emf.createEntityManager();
 
@@ -95,7 +95,7 @@ public class EmployeeFacade {
         EmployeeFacade pe = getInstance(emf);
         /*pe.getAll().forEach(dto->System.out.println(dto));*/
 
-       EmployeeDTO employee  = pe.getEployeeWithHighestSalary();
+       EmployeeDTO employee  = pe.getEmployeeWithHighestSalary();
 
         System.out.println(employee);
     }

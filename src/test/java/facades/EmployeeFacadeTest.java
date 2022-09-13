@@ -92,7 +92,7 @@ public class EmployeeFacadeTest
     @Test
     public void getEmployeeWithHighestSalary()
     {
-        EmployeeDTO result = facade.getEployeeWithHighestSalary();
+        EmployeeDTO result = facade.getEmployeeWithHighestSalary();
         assertEquals("Betul", result.getName());
     }
 

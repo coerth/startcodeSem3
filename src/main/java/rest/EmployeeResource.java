@@ -2,6 +2,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.EmployeeDTO;
 import facades.EmployeeFacade;
 import utils.EMF_Creator;
 import javax.persistence.EntityManagerFactory;
@@ -23,14 +24,13 @@ public class EmployeeResource
         return "{\"msg\":\"Hello World\"}";
     }
 
-   /* @POST
+    @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response postExample(String input){
-        RenameMeDTO rmdto = GSON.fromJson(input, RenameMeDTO.class);
-        System.out.println(rmdto);
-        return Response.ok().entity(rmdto).build();
-    }*/
+    public Response createEmployee(String jsonInput){
+        //System.out.println(employeeDTO);
+        return Response.ok().entity(GSON.toJson(FACADE.create(GSON.fromJson(jsonInput, EmployeeDTO.class)))).build();
+    }
 
     @GET
     @Path("/all")
@@ -46,7 +46,7 @@ public class EmployeeResource
     @Produces({MediaType.APPLICATION_JSON})
     public Response getHighestPaid()
     {
-        return Response.ok().entity(GSON.toJson(FACADE.getEployeeWithHighestSalary())).build();
+        return Response.ok().entity(GSON.toJson(FACADE.getEmployeeWithHighestSalary())).build();
     }
 
     @GET

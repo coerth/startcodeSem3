@@ -25,14 +25,14 @@ public class PersonResource {
         return "{\"msg\":\"Hello World\"}";
     }
 
-   /* @POST
+    @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
     public Response postExample(String input){
         RenameMeDTO rmdto = GSON.fromJson(input, RenameMeDTO.class);
         System.out.println(rmdto);
         return Response.ok().entity(rmdto).build();
-    }*/
+    }
 
     @GET
     @Path("/all")
