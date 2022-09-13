@@ -2,6 +2,7 @@ package facades;
 
 import dtos.EmployeeDTO;
 import entities.Employee;
+import errorhandling.EmployeeNotFoundException;
 import utils.EMF_Creator;
 
 import javax.persistence.EntityManager;
@@ -59,7 +60,7 @@ public class EmployeeFacade {
         Employee employeeFromDB = em.find(Employee.class, employeeDTO.getId());
         if(employeeFromDB == null)
         {
-            throw new EntityNotFoundException("No such Employee with id:" + employeeDTO.getId());
+            throw new EmployeeNotFoundException("No such Employee with id:" + employeeDTO.getId());
         }
 
         Employee Employee = new Employee(employeeDTO.getId(),employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());

@@ -3,6 +3,8 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.EmployeeDTO;
+import errorhandling.EmployeeNotFoundException;
+import errorhandling.GenericExceptionMapper;
 import facades.EmployeeFacade;
 import utils.EMF_Creator;
 import javax.persistence.EntityManagerFactory;
@@ -65,7 +67,14 @@ public class EmployeeResource
     {
         EmployeeDTO employeeDTO = GSON.fromJson(jsonInput,EmployeeDTO.class);
         employeeDTO.setId(id);
-        return Response.ok().entity(GSON.toJson(FACADE.update(employeeDTO))).build();
+        try{
+
+            return Response.ok().entity(GSON.toJson(FACADE.update(employeeDTO))).build();
+        }
+        catch (EmployeeNotFoundException e)
+        {
+            throw e;
+        }
     }
 
     @GET
@@ -81,5 +90,6 @@ public class EmployeeResource
     @Produces({MediaType.APPLICATION_JSON})
     public Response throwException() throws Exception {
         throw  new Exception("my exception");
+
     }
 }
