@@ -59,10 +59,13 @@ public class EmployeeResource
         return Response.ok().entity(GSON.toJson(FACADE.getById(id))).build();
     }
     @PUT
+    @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response update(String jsonInput)
+    public Response update(String jsonInput, @PathParam("id") long id)
     {
-        return Response.ok().entity(GSON.toJson(FACADE.update(GSON.fromJson(jsonInput,EmployeeDTO.class)))).build();
+        EmployeeDTO employeeDTO = GSON.fromJson(jsonInput,EmployeeDTO.class);
+
+        return Response.ok().entity(GSON.toJson(FACADE.update(employeeDTO, id))).build();
     }
 
     @GET

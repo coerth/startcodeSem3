@@ -1,4 +1,4 @@
-GET http://localhost:8080/devops_starter_war_exploded/api/xxx
+GET https://koksikoden.dk/startcodeSem3/api/employee/id/1
 
 ###
 POST https://koksikoden.dk/startcodeSem3/api/employee/
@@ -6,3 +6,12 @@ Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
 
 {"name": "Thomas", "address": "Thomasvej", "salary":  30000}
+
+###
+PUT https://koksikoden.dk/startcodeSem3/api/employee/1
+Content-Type: application/json
+#User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+
+{"name": "Kong Charles", "address": "Buckingham Palace", "salary":  100000}
+
+###

@@ -53,16 +53,16 @@ public class EmployeeFacade {
         return new EmployeeDTO(Employee);
     }
 
-    public EmployeeDTO update(EmployeeDTO employeeDTO)
+    public EmployeeDTO update(EmployeeDTO employeeDTO, long id)
     {
         EntityManager em = getEntityManager();
-        Employee employeeFromDB = em.find(Employee.class, employeeDTO.getId());
+        Employee employeeFromDB = em.find(Employee.class, id);
         if(employeeFromDB == null)
         {
             throw new EntityNotFoundException("No such Employee with id:" + employeeDTO.getId());
         }
 
-        Employee Employee = new Employee( employeeDTO.getId(),employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
+        Employee Employee = new Employee(id,employeeDTO.getName(), employeeDTO.getAddress(), employeeDTO.getSalary());
 
         try {
             em.getTransaction().begin();
@@ -120,7 +120,7 @@ public class EmployeeFacade {
        EmployeeDTO employee  = pe.getEmployeeWithHighestSalary();
 
         System.out.println(employee);
-        pe.update(new EmployeeDTO(new Employee(Long.valueOf(1), "Henriette", "Balkonen", 300)));
+        //pe.update(new EmployeeDTO(new Employee(Long.valueOf(1), "Henriette", "Balkonen", 300)));
     }
 
 }
