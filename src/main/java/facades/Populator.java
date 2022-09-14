@@ -34,6 +34,8 @@ public class Populator {
 
         MovieFacade mf = MovieFacade.getInstance(emf);
        // mf.create(new MovieDTO(new Movie(2018, "Hukommelsestab", "Thriller")));
+        mf.create(new MovieDTO(new Movie(2019, "Nu kan jeg huske", "Thriller")));
+
         Actor denis = new Actor("Denis");
 
         MovieDTO m1 = mf.getById(1);

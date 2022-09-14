@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class ActorDTO
 {
-    private int id;
+    private Long id;
     private String name;
     private Set<MovieDTO> movies = new LinkedHashSet<>();
 
@@ -30,11 +30,11 @@ public class ActorDTO
 
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class MovieDTO
 {
-    private Integer id;
+    private Long id;
     private Integer year;
     private String title;
     private String genre;
@@ -33,11 +33,11 @@ public class MovieDTO
         }
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

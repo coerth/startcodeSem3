@@ -10,7 +10,7 @@ import java.util.Set;
 public class Actor {
     @Id
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
@@ -21,11 +21,11 @@ public class Actor {
             inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> movies = new LinkedHashSet<>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

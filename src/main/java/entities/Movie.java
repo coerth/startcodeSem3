@@ -11,7 +11,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private long id;
 
     @Column(name = "year", nullable = false)
     private Integer year;
@@ -28,11 +28,11 @@ public class Movie {
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
     private Set<Actor> actors = new LinkedHashSet<>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
