@@ -1,7 +1,9 @@
 package facades;
 
+import dtos.ActorDTO;
 import dtos.MovieDTO;
 import dtos.MovieDTO;
+import entities.Actor;
 import entities.Movie;
 import entities.Movie;
 
@@ -13,6 +15,7 @@ public class MovieFacade
 {
     private static MovieFacade instance;
     private static EntityManagerFactory emf;
+    private static ActorFacade actorFacade;
 
     //Private Constructor to ensure Singleton
     private MovieFacade() {}
@@ -27,12 +30,35 @@ public class MovieFacade
         if (instance == null) {
             emf = _emf;
             instance = new MovieFacade();
+            actorFacade = ActorFacade.getInstance(emf);
         }
         return instance;
     }
 
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+
+    public Movie create(Movie movie){
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            movie.getActors().forEach(actor -> {
+                if(actor.getId() == null || actor.getId() == 0)
+                {
+                    em.persist(actor);
+                }
+                else {
+                    actor = em.find(Actor.class, actor.getId());
+                }
+            });
+            em.persist(movie);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return movie;
     }
 
     public MovieDTO create(MovieDTO movieDTO){
@@ -48,23 +74,66 @@ public class MovieFacade
         return new MovieDTO(Movie);
     }
 
-    public MovieDTO update(MovieDTO movieDTO)
+    public MovieDTO update(Movie movie)
     {
         EntityManager em = getEntityManager();
-        Movie MovieFromDB = em.find(Movie.class, movieDTO.getId());
-
-
-        Movie Movie = new Movie(movieDTO.getYear(), movieDTO.getTitle(), movieDTO.getGenre());
-
 
         try {
             em.getTransaction().begin();
-            em.merge(Movie);
+        for (Actor a : movie.getActors())
+        {
+            if(a.getId() == null)
+            {
+               em.persist(a);
+               em.getTransaction().commit();
+
+            }
+        }
+
+
+
+           // em.getTransaction().begin();
+            em.merge(movie);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return new MovieDTO(Movie);
+        return new MovieDTO(movie);
+    }
+
+    public MovieDTO update(MovieDTO movieDTO)
+    {
+        EntityManager em = getEntityManager();
+        MovieDTO movieFromDB = new MovieDTO( em.find(Movie.class, movieDTO.getId()));
+
+        /*if(movieDTO.equals(movieDTO))
+        {
+            return movieFromDB;
+        }*/
+
+        for(ActorDTO a : movieDTO.getActors())
+        {
+            if(a.getId() == null)
+            {
+                a = ActorFacade.getInstance(emf).create(a);
+            }
+            else
+            {
+               a = ActorFacade.getInstance(emf).update(a);
+            }
+        }
+
+        Movie movie = new Movie(movieDTO);
+
+
+        try {
+            em.getTransaction().begin();
+            em.merge(movie);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new MovieDTO(movie);
     }
     public MovieDTO getById(long id)
     {

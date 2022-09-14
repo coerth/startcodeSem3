@@ -1,9 +1,12 @@
 package dtos;
 
 import entities.Actor;
+import entities.Employee;
 import entities.Movie;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ActorDTO
@@ -20,13 +23,18 @@ public class ActorDTO
         }
         this.id = actor.getId();
         this.name = actor.getName();
-        if(!actor.getMovies().isEmpty())
+        /*if(!actor.getMovies().isEmpty())
         {
             for(Movie m : actor.getMovies())
             {
-                movies.add(new MovieDTO(m));
+                MovieDTO newMovie = new MovieDTO(m);
+                if(movies.contains(newMovie))
+                {
+                    continue;
+                }
+                movies.add(newMovie);
             }
-        }
+        }*/
 
     }
 
@@ -44,5 +52,19 @@ public class ActorDTO
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<MovieDTO> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<MovieDTO> movies) {
+        this.movies = movies;
+    }
+
+    public static Set<ActorDTO> getDtos(Set<Actor> actors){
+        Set<ActorDTO> actorsDTOS = new LinkedHashSet<>();
+        actors.forEach(actor->actorsDTOS.add(new ActorDTO(actor)));
+        return actorsDTOS;
     }
 }

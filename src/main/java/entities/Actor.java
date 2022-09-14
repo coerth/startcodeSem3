@@ -1,5 +1,7 @@
 package entities;
 
+import dtos.ActorDTO;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -50,6 +52,14 @@ public class Actor {
 
     public Actor(String name) {
         this.name = name;
+    }
+
+    public Actor(ActorDTO actorDTO)
+    {
+        this.id = actorDTO.getId();
+        this.name = actorDTO.getName();
+
+        //actorDTO.getMovies().forEach(movieDTO -> movies.add(new Movie(movieDTO)));
     }
 
     @Override

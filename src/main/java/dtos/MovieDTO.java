@@ -28,7 +28,12 @@ public class MovieDTO
         {
             for(Actor a : movie.getActors())
             {
-                actors.add(new ActorDTO(a));
+                ActorDTO newActor = new ActorDTO(a);
+                if(actors.contains(newActor))
+                {
+                    continue;
+                }
+                actors.add(newActor);
             }
         }
     }
@@ -71,5 +76,35 @@ public class MovieDTO
 
     public void setActors(Set<ActorDTO> actors) {
         this.actors = actors;
+    }
+
+    public static Set<MovieDTO> getDtos(Set<Movie> movies)
+    {
+        Set<MovieDTO> movieDTOS = new LinkedHashSet<>();
+        movies.forEach(movie->movieDTOS.add(new MovieDTO(movie)));
+        return movieDTOS;
+    }
+
+    @Override
+    public String toString() {
+
+        String actorsInMovie = "";
+                for(ActorDTO a : actors)
+                {
+                    actorsInMovie += a.getName()+'\n';
+                }
+
+        return "MovieDTO{" +
+                "id=" + id +
+                ", year=" + year +
+                ", title='" + title + '\'' +
+                ", genre='" + genre + '\'' +
+                actorsInMovie + '\'' +
+                '}';
+    }
+
+    public void addActor(ActorDTO actorDTO)
+    {
+        actors.add(actorDTO);
     }
 }

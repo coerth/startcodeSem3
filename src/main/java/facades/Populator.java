@@ -31,14 +31,31 @@ public class Populator {
 
         MovieFacade mf = MovieFacade.getInstance(emf);
         ActorFacade af = ActorFacade.getInstance(emf);
-        mf.create(new MovieDTO(new Movie(2018, "Hukommelsestab", "Thriller")));
+        /*mf.create(new MovieDTO(new Movie(2018, "Hukommelsestab", "Thriller")));
         mf.create(new MovieDTO(new Movie(2019, "Nu kan jeg huske", "Thriller")));
         mf.create(new MovieDTO(new Movie(2020, "Jeg glemte igen", "Thriller")));
 
-        af.create(new ActorDTO(new Actor("Denis")));
+        af.create(new ActorDTO(new Actor("Denis")));*/
 
 
-        MovieDTO m1 = mf.getById(1);
+        /*MovieDTO m1 = mf.getById(4);
+        System.out.println(m1);
+
+
+        m1.addActor(af.getById(3));
+        System.out.println(m1);
+
+        mf.update(m1);
+        System.out.println(m1);*/
+
+        Movie movie = new Movie(2022, "Many to many er prut", "Gyser");
+        Actor actor = new Actor("Morten");
+
+        movie.addActor(actor);
+
+        mf.create(movie);
+
+
 
 
     }

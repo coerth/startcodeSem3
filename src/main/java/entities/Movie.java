@@ -1,5 +1,7 @@
 package entities;
 
+import dtos.MovieDTO;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -22,7 +24,7 @@ public class Movie {
     @Column(name = "genre", nullable = false, length = 45)
     private String genre;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "movie_has_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
@@ -77,6 +79,18 @@ public class Movie {
         this.genre = genre;
     }
 
+    public Movie(MovieDTO movieDTO)
+    {
+        this.id = movieDTO.getId();
+        this.year = movieDTO.getYear();
+        this.title = movieDTO.getTitle();
+        this.genre = movieDTO.getGenre();
+
+       //movieDTO.getActors().forEach(actorDTO -> actors.add(new Actor(actorDTO)));
+
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,5 +117,18 @@ public class Movie {
     public void addActor(Actor actor)
     {
         actors.add(actor);
+    }
+
+    public static Set<Movie> getEntities(Set<MovieDTO> movieDTOS)
+    {
+        Set<Movie> movies = new LinkedHashSet<>();
+        //movieDTOS.forEach(movieDTO->movies.add(new Movie(movieDTO)));
+
+        for(MovieDTO mdto : movieDTOS)
+        {
+            movies.add(new Movie(mdto));
+        }
+
+        return movies;
     }
 }

@@ -47,6 +47,18 @@ public class ActorFacade
         return new ActorDTO(actor);
     }
 
+    public Long create(Actor actor){
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(actor);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return actor.getId();
+    }
+
     public ActorDTO update(ActorDTO actorDTO)
     {
         EntityManager em = getEntityManager();
