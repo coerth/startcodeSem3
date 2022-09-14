@@ -15,3 +15,7 @@ Content-Type: application/json
 {"name": "Kong Charles", "address": "Buckingham Palace", "salary":  100000000}
 
 ###
+
+GET http://koksikoden.dk/startcodeSem3/api/employee/all/
+Content-Type: application/json
+#User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
