@@ -5,10 +5,7 @@
  */
 package facades;
 
-import dtos.EmployeeDTO;
-import dtos.MovieDTO;
-import dtos.PersonDTO;
-import dtos.RenameMeDTO;
+import dtos.*;
 import entities.*;
 
 import javax.persistence.EntityManagerFactory;
@@ -33,10 +30,13 @@ public class Populator {
         ef.create(new EmployeeDTO(new Employee("Betul", "en fjerde adresse", 100)));*/
 
         MovieFacade mf = MovieFacade.getInstance(emf);
-       // mf.create(new MovieDTO(new Movie(2018, "Hukommelsestab", "Thriller")));
+        ActorFacade af = ActorFacade.getInstance(emf);
+        mf.create(new MovieDTO(new Movie(2018, "Hukommelsestab", "Thriller")));
         mf.create(new MovieDTO(new Movie(2019, "Nu kan jeg huske", "Thriller")));
+        mf.create(new MovieDTO(new Movie(2020, "Jeg glemte igen", "Thriller")));
 
-        Actor denis = new Actor("Denis");
+        af.create(new ActorDTO(new Actor("Denis")));
+
 
         MovieDTO m1 = mf.getById(1);
 
