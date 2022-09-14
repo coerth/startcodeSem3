@@ -17,10 +17,10 @@ public class Actor {
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "movie_has_actor",
+    @ManyToMany(mappedBy = "actors")
+    /*@JoinTable(name = "movie_has_actor",
             joinColumns = @JoinColumn(name = "actor_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))*/
     private Set<Movie> movies = new LinkedHashSet<>();
 
     public Long getId() {
