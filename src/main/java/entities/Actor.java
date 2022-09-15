@@ -86,9 +86,9 @@ public class Actor {
     public void addMovie(Movie movie)
     {
         movies.add(movie);
-        if(!movie.getActors().contains(this))
+        /*if(!movie.getActors().contains(this))
         {
             movie.addActor(this);
-        }
+        }*/
     }
 }

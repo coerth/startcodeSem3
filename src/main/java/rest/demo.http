@@ -19,3 +19,10 @@ Content-Type: application/json
 GET http://koksikoden.dk/startcodeSem3/api/employee/all/
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
+
+###
+GET http://localhost:8080/devops_starter_war_exploded/api/actor/all
+
+###
+
+GET http://localhost:8080/devops_starter_war_exploded/api/actor/2

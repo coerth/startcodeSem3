@@ -47,14 +47,24 @@ public class Populator {
 
         mf.update(m1);
         System.out.println(m1);*/
-
+/*
         Movie movie = new Movie(2022, "Many to many er prut", "Gyser");
         Actor actor = new Actor("Morten");
 
 
         movie.addActor(actor);
 
-        mf.create(movie);
+        mf.create(movie);*/
+
+        Actor actor = new Actor("Jon");
+
+        Movie movie = new Movie(2021, "Betul skal med til raid", "Dokumentar");
+
+        actor.addMovie(movie);
+
+        af.create(actor);
+
+        System.out.println(actor);
 
 
 

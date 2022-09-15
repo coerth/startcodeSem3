@@ -62,8 +62,8 @@ public class ActorDTO
         this.movies = movies;
     }
 
-    public static Set<ActorDTO> getDtos(Set<Actor> actors){
-        Set<ActorDTO> actorsDTOS = new LinkedHashSet<>();
+    public static List<ActorDTO> getDtos(List<Actor> actors){
+        List<ActorDTO> actorsDTOS = new ArrayList<>();
         actors.forEach(actor->actorsDTOS.add(new ActorDTO(actor)));
         return actorsDTOS;
     }

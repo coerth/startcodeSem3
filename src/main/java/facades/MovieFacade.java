@@ -43,21 +43,16 @@ public class MovieFacade
 
     public Movie create(Movie movie){
         EntityManager em = getEntityManager();
-
         try {
-
             em.getTransaction().begin();
                  movie.getActors().forEach(actor -> {
                     em.persist(actor);
                  });
             em.persist(movie);
             em.getTransaction().commit();
-
         } finally {
             em.close();
         }
-
-        movie.getActors().forEach(System.out::println);
         return movie;
     }
 

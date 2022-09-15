@@ -4,9 +4,13 @@ import dtos.ActorDTO;
 import dtos.ActorDTO;
 import entities.Actor;
 import entities.Actor;
+import entities.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActorFacade
 {
@@ -47,16 +51,39 @@ public class ActorFacade
         return new ActorDTO(actor);
     }
 
-    public Long create(Actor actor){
+    public Actor create(Actor actor){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
+            actor.getMovies().forEach(movie -> {
+                em.persist(movie);
+            });
             em.persist(actor);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
-        return actor.getId();
+        return actor;
+    }
+
+    public List<ActorDTO> getAll()
+    {
+        EntityManager em = getEntityManager();
+
+        List<ActorDTO> actors = new ArrayList<>();
+
+        try
+        {
+            TypedQuery<Actor> query = em.createQuery("SELECT a FROM Actor a", Actor.class);
+            actors = ActorDTO.getDtos(query.getResultList());
+
+        }
+        finally {
+            em.close();
+        }
+
+        return actors;
+
     }
 
     public ActorDTO update(ActorDTO actorDTO)
