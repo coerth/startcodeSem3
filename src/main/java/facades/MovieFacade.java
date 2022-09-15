@@ -10,6 +10,8 @@ import entities.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class MovieFacade 
 {
@@ -43,21 +45,19 @@ public class MovieFacade
         EntityManager em = getEntityManager();
 
         try {
+
             em.getTransaction().begin();
-            movie.getActors().forEach(actor -> {
-                if(actor.getId() == null || actor.getId() == 0)
-                {
+                 movie.getActors().forEach(actor -> {
                     em.persist(actor);
-                }
-                else {
-                    actor = em.find(Actor.class, actor.getId());
-                }
-            });
+                 });
             em.persist(movie);
             em.getTransaction().commit();
+
         } finally {
             em.close();
         }
+
+        movie.getActors().forEach(System.out::println);
         return movie;
     }
 

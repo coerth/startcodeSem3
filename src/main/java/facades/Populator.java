@@ -51,6 +51,7 @@ public class Populator {
         Movie movie = new Movie(2022, "Many to many er prut", "Gyser");
         Actor actor = new Actor("Morten");
 
+
         movie.addActor(actor);
 
         mf.create(movie);

@@ -12,15 +12,16 @@ import java.util.Set;
 public class Actor {
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false, length = 45)
     private String name;
 
-    @ManyToMany(mappedBy = "actors")
-    /*@JoinTable(name = "movie_has_actor",
+    @ManyToMany
+    @JoinTable(name = "movie_has_actor",
             joinColumns = @JoinColumn(name = "actor_id"),
-            inverseJoinColumns = @JoinColumn(name = "movie_id"))*/
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Movie> movies = new LinkedHashSet<>();
 
     public Long getId() {
@@ -85,6 +86,9 @@ public class Actor {
     public void addMovie(Movie movie)
     {
         movies.add(movie);
-        movie.addActor(this);
+        if(!movie.getActors().contains(this))
+        {
+            movie.addActor(this);
+        }
     }
 }

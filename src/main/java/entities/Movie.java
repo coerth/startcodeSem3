@@ -24,7 +24,7 @@ public class Movie {
     @Column(name = "genre", nullable = false, length = 45)
     private String genre;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "movie_has_actor",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id"))
@@ -117,6 +117,10 @@ public class Movie {
     public void addActor(Actor actor)
     {
         actors.add(actor);
+     /*   if(!actor.getMovies().contains(this))
+        {
+            actor.addMovie(this);
+        }*/
     }
 
     public static Set<Movie> getEntities(Set<MovieDTO> movieDTOS)
