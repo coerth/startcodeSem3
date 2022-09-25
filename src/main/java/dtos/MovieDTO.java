@@ -5,6 +5,7 @@ import entities.Movie;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MovieDTO
 {
@@ -12,7 +13,7 @@ public class MovieDTO
     private Integer year;
     private String title;
     private String genre;
-    private Set<ActorDTO> actors = new LinkedHashSet<>();
+    private Set<Actor> actors = new LinkedHashSet<>();
 
     public MovieDTO(Movie movie)
     {
@@ -23,18 +24,9 @@ public class MovieDTO
         this.year = movie.getYear();
         this.title = movie.getTitle();
         this.genre = movie.getGenre();
-
         if(!movie.getActors().isEmpty())
         {
-            for(Actor a : movie.getActors())
-            {
-                ActorDTO newActor = new ActorDTO(a);
-                if(actors.contains(newActor))
-                {
-                    continue;
-                }
-                actors.add(newActor);
-            }
+        this.actors = movie.getActors().stream().map(actor -> new Actor(actor)).collect(Collectors.toSet());
         }
     }
 
@@ -70,11 +62,11 @@ public class MovieDTO
         this.genre = genre;
     }
 
-    public Set<ActorDTO> getActors() {
+    public Set<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(Set<ActorDTO> actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 
@@ -85,26 +77,51 @@ public class MovieDTO
         return movieDTOS;
     }
 
+    class Actor{
+        private long id;
+        private String name;
+
+        public Actor (entities.Actor actor) {
+            if(actor.getId() != null)
+            {
+            this.id = actor.getId();
+            }
+            this.name = actor.getName();
+        }
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Actor{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
+    }
+
     @Override
     public String toString() {
-
-        String actorsInMovie = "";
-                for(ActorDTO a : actors)
-                {
-                    actorsInMovie += a.getName()+'\n';
-                }
-
         return "MovieDTO{" +
                 "id=" + id +
                 ", year=" + year +
                 ", title='" + title + '\'' +
                 ", genre='" + genre + '\'' +
-                actorsInMovie + '\'' +
+                ", actors=" + actors +
                 '}';
-    }
-
-    public void addActor(ActorDTO actorDTO)
-    {
-        actors.add(actorDTO);
     }
 }

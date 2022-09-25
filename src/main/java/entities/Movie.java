@@ -86,7 +86,7 @@ public class Movie {
         this.title = movieDTO.getTitle();
         this.genre = movieDTO.getGenre();
 
-       //movieDTO.getActors().forEach(actorDTO -> actors.add(new Actor(actorDTO)));
+       movieDTO.getActors().forEach(actorDTO -> actors.add(new Actor(actorDTO)));
 
 
     }

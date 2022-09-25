@@ -60,11 +60,11 @@ public class Populator {
 
         Movie movie = new Movie(2021, "Betul skal med til raid", "Dokumentar");
 
-        actor.addMovie(movie);
+        movie.addActor(actor);
 
-        af.create(actor);
+       MovieDTO movieDTO = mf.create(new MovieDTO(movie));
 
-        System.out.println(actor);
+        System.out.println(movieDTO);
 
 
 

@@ -80,7 +80,8 @@ public class Actor {
     public String toString() {
         return "Actor{" +
                 "id=" + id +
-                ", name='" + name;
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public void addMovie(Movie movie)

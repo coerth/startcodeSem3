@@ -111,6 +111,21 @@ public class ActorFacade
 
         return new ActorDTO(actor);
     }
+
+    public void delete(Integer id)
+    {
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            Actor actor = em.find(Actor.class, id);
+            em.remove(actor);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+
+    }
 }
 
 

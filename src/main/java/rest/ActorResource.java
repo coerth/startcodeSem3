@@ -49,10 +49,19 @@ public class ActorResource
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getById(@PathParam("id") int id)
+    public Response getById(@PathParam("id") Integer id)
     {
 
         return Response.ok().entity(GSON.toJson(FACADE.getById(id))).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response deleteById(@PathParam("id") Integer id)
+    {
+        FACADE.delete(id);
+        return Response.ok("Actor with id: " + id + "has been deleted").build();
     }
 
     @GET
