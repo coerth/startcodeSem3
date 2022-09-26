@@ -1,6 +1,7 @@
 package entities;
 
 import dtos.ActorDTO;
+import dtos.MovieDTO;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -62,6 +63,7 @@ public class Actor {
 
         //actorDTO.getMovies().forEach(movieDTO -> movies.add(new Movie(movieDTO)));
     }
+
 
     @Override
     public boolean equals(Object o) {

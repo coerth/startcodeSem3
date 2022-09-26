@@ -70,6 +70,8 @@ public class MovieDTO
         this.actors = actors;
     }
 
+
+
     public static Set<MovieDTO> getDtos(Set<Movie> movies)
     {
         Set<MovieDTO> movieDTOS = new LinkedHashSet<>();
@@ -77,8 +79,8 @@ public class MovieDTO
         return movieDTOS;
     }
 
-    class Actor{
-        private long id;
+   public class Actor{
+        private Long id;
         private String name;
 
         public Actor (entities.Actor actor) {
@@ -89,7 +91,7 @@ public class MovieDTO
             this.name = actor.getName();
         }
 
-        public long getId() {
+        public Long getId() {
             return id;
         }
 

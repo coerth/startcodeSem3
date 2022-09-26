@@ -69,7 +69,7 @@ public class ActorDTO
                 '}';
     }
 
-    class Movie {
+   public class Movie {
         private long id;
         private Integer year;
         private String title;

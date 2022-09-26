@@ -48,6 +48,8 @@ public class MovieFacade
             em.getTransaction().begin();
                  movieDTO.getActors().forEach(actor ->
                  {
+
+
                      if(actor.getId() != null)
                      {
                          actor = new ActorDTO(em.find(Actor.class, actor.getId()));
